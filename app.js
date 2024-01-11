@@ -21,7 +21,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.set("view engine", "ejs");
 
-mongoose.connect(MONGO_DB);
+mongoose.connect(process.env.MONGO_DB);
 
 const itemSchema = {
   name: String,
