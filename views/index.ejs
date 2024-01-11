@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <link rel="icon" href="/list.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="box" id="heading">
+      <h1><%= listTitle %></h1>
+    </div>
+    <div class="yourLists box">
+      <% listsArr.forEach(function(list){ %>
+      <a class="listBtn" href="/<%= list.name %>"><%= list.name %></a>
+      <% }) %>
+    </div>
+
+    <div class="box">
+      <% itemsArr.forEach(function(item){ %>
+      <form action="/delete" method="post">
+        <div class="item">
+          <input
+            class="itemCheckbox"
+            type="checkbox"
+            name="checkedItem"
+            value="<%= item._id %>"
+            onChange="this.form.submit()"
+          />
+          <p><%= item.name %></p>
+        </div>
+        <input type="hidden" name="listName" value="<%= listTitle %>" />
+      </form>
+      <% }) %>
+
+      <form action="/addItem" method="post" class="addItem">
+        <input
+          type="text"
+          name="newItem"
+          placeholder="New Item"
+          autocomplete="off"
+        />
+        <button
+          class="addBtn"
+          type="submit"
+          name="listName"
+          value="<%= listTitle %>"
+        >
+          +
+        </button>
+      </form>
+    </div>
+    <footer>
+      <a
+        class="attribution"
+        href="https://www.flaticon.com/free-icons/to-do-list"
+        >To do list icons created by Freepik - Flaticon</a
+      >
+    </footer>
+  </body>
+</html>
